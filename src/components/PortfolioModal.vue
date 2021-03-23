@@ -78,5 +78,18 @@ export default {
       }
     }
   }
+  @media (max-width: 700px) {
+    .modal-content {
+      flex-direction: column-reverse;
+    }
+    .modal-left {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .modal-right {
+      padding: 0;
+    }
+  }
 }
 </style>

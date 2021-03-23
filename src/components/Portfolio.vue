@@ -134,7 +134,8 @@ export default {
 <style lang="postcss">
 @import '/src/assets/css/global.css';
 
-.portfolio-wrap {
+.home-wrap > .portfolio-wrap {
+  z-index: 2000;
   background-color: $background-white;
   .portfolio {
     display: flex;
