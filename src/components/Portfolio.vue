@@ -1,5 +1,9 @@
 <template>
-<div id="portfolio" class="portfolio-wrap">
+<div
+  id="portfolio"
+  class="portfolio-wrap"
+  :class="{ 'modal-open': !!activeItem }"
+>
   <div class="portfolio container">
     <div class="portfolio-title section-title">
       <span :class="{ selected }">{{ $t('portfolio.title') }}</span>
@@ -135,7 +139,9 @@ export default {
 @import '/src/assets/css/global.css';
 
 .home-wrap > .portfolio-wrap {
-  z-index: 2000;
+  &.modal-open {
+    z-index: 2000;
+  }
   background-color: $background-white;
   .portfolio {
     display: flex;
