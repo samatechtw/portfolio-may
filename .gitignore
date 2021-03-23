@@ -30,3 +30,5 @@ __pycache__
 
 # Postcss
 *.postcss.json
+
+pnpm-lock.yaml
