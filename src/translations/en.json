@@ -1,0 +1,66 @@
+{
+  "header": {
+    "about": "ABOUT",
+    "services": "SERVICES",
+    "portfolio": "PORTFOLIO",
+    "contact": "CONTACT",
+    "resume": "RESUME"
+  },
+  "about": {
+    "title": "About me",
+    "items": [
+      "4+ years of working in the fields of Digital Marketing, Content Writing, Social Media, and Internal Communications",
+      "Experienced a diversity of workplaces in America, Taiwan, and Vietnam; for both company and freelance jobs",
+      "MBA graduate from Chang Gung University, Taiwan",
+      "Proactive, enthusiastic, and detail-oriented"
+    ]
+  },
+  "services": {
+    "title": "Specializations",
+    "writer": {
+      "title": "CONTENT WRITER",
+      "bullets": [
+        "Create engaging articles in the form of e-newsletters, press releases, site posts, and social media content",
+        "Experience producing SEO content for WordPress sites"
+      ]
+    },
+    "media": {
+      "title": "SOCIAL MEDIA MANAGEMENT",
+      "bullets": [
+        "Develop marketing campaigns and strategies on relevant media platforms.",
+        "Ensure brand consistency in marketing and social media messages, including advertising, product development, and brand management"
+      ]
+    },
+    "graphic": {
+      "title": "GRAPHIC DESIGNER",
+      "bullets": [
+        "Produce graphic content to promote company products/services or events"
+      ]
+    }
+  },
+  "portfolio": {
+    "title": "Portfolio"
+  },
+  "resume": {
+    "title": "Resume"
+  },
+  "contact": {
+    "work": "Let's work together!",
+    "email": {
+      "title": "EMAIL",
+      "content": "Ltmk1994{'@'}gmail.com"
+    },
+    "linkedin": {
+      "title": "LINKEDIN",
+      "content": "May Luong"
+    },
+    "instagram": {
+      "title": "INSTAGRAM",
+      "content": "{'@'}mayderlust"
+    },
+    "facebook": {
+      "title": "FACEBOOK",
+      "content": "{'@'}sweetkhet"
+    }
+  }
+}

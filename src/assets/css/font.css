@@ -1,0 +1,30 @@
+
+@font-face {
+  font-family: 'Staatliches';
+  src:
+    url('/src/assets/fonts/Staatliches-Regular.woff2') format('woff2'),
+    url('/src/assets/fonts/Staatliches-Regular.woff') format('woff'),
+    url('/src/assets/fonts/Staatliches-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SortsMillGoudy';
+  src:
+    url('/src/assets/fonts/SortsMillGoudy-Regular.woff2') format('woff2'),
+    url('/src/assets/fonts/SortsMillGoudy-Regular.woff') format('woff'),
+    url('/src/assets/fonts/SortsMillGoudy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SortsMillGoudy';
+  src:
+    url('/src/assets/fonts/SortsMillGoudy-Italic.woff2') format('woff2'),
+    url('/src/assets/fonts/SortsMillGoudy-Italic.woff') format('woff'),
+    url('/src/assets/fonts/SortsMillGoudy-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
