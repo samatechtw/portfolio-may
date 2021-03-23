@@ -85,10 +85,10 @@ export default {
   .contact-items {
     display: flex;
     color: $text-brown;
-    margin-top: 64px;
     justify-content: space-around;
     .contact-item {
       width: 33%;
+      margin-top: 64px;
     }
     .contact-item a:hover {
       color: $text-brick;
@@ -105,6 +105,19 @@ export default {
   .footer-img {
     margin: 64px auto 0;
     width: 500px;
+    max-width: 70%;
+  }
+  @media (max-width: 760px) {
+    .contact-items {
+      flex-direction: column;
+      align-items: center;
+      .contact-item {
+        width: 100%;
+      }
+    }
+    .contact-title {
+      font-size: 64px;
+    }
   }
 }
 </style>

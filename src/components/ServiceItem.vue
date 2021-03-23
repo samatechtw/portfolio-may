@@ -1,11 +1,16 @@
 <template>
 <div class="service-item">
-  <div class="service-item-image">
+  <div class="service-item-image desktop">
     <img :src="image" :style="{ width: imageWidth }">
   </div>
   <div class="service-item-text">
-    <div class="service-item-title">
-      {{ copy.title }}
+    <div class="service-item-title-wrap">
+      <div class="service-item-image mobile">
+        <img :src="image" :style="{ width: imageWidth }">
+      </div>
+      <div class="service-item-title">
+        {{ copy.title }}
+      </div>
     </div>
     <ul>
       <li
@@ -54,6 +59,10 @@ export default {
       height: auto;
       margin-right: 24px;
     }
+    &.mobile {
+      display: none;
+      margin-left: 16px;
+    }
   }
   ul {
     @mixin text 20px;
@@ -64,11 +73,25 @@ export default {
       color: $text-brown;
     }
   }
+  .service-item-title-wrap {
+    display: flex;
+    align-items: center;
+  }
   .service-item-title {
     @mixin text-italic 28px;
     color: $text-brown-light;
     text-shadow: 1px 1px 0 $text-brown-shadow;
     margin-left: 16px;
+  }
+  @media (max-width: 900px) {
+    .service-item-image {
+      &.desktop {
+        display: none;
+      }
+      &.mobile {
+        display: block;
+      }
+    }
   }
 }
 </style>

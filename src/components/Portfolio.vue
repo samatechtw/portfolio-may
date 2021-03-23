@@ -9,6 +9,7 @@
         v-for="n in columns"
         :key="n"
         class="portfolio-column"
+        :class="`columns${columns}`"
       >
         <PortfolioItem
           v-for="(item, index) in colItems(n - 1)"
@@ -99,6 +100,10 @@ export default {
   name: 'portfolio',
   props: {
     selected: Boolean,
+    columns: {
+      type: Number,
+      default: 3,
+    },
   },
   data() {
     return {
@@ -106,7 +111,6 @@ export default {
       activeItem: null,
       width: '100%',
       margin: '8px 0;',
-      columns: 3,
     };
   },
   methods: {
@@ -153,6 +157,9 @@ export default {
   .portfolio-column {
     width: 27%;
     margin: 0 1%;
+    &.columns2 {
+      width: 40%;
+    }
   }
 }
 </style>

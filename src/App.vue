@@ -31,5 +31,11 @@ html,body {
   padding-right: 40px;
   margin: 0 auto;
 }
+@media (max-width: 900px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 
 </style>

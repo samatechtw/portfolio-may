@@ -15,7 +15,11 @@
   <MayHeader :activeSection="activeSection" />
   <About ref="about" :selected="activeSection === 'about'" />
   <Services ref="services" :selected="activeSection === 'services'" />
-  <Portfolio ref="portfolio" :selected="activeSection === 'portfolio'" />
+  <Portfolio
+    ref="portfolio"
+    :selected="activeSection === 'portfolio'"
+    :columns="portfolioColumns"
+  />
   <Contact ref="contact" :selected="activeSection === 'contact'" />
 </div>
 </template>
@@ -28,6 +32,7 @@ export default {
   data() {
     return {
       activeSection: null,
+      portfolioColumns: 3,
     };
   },
   methods: {
@@ -35,7 +40,7 @@ export default {
       const top = window.pageYOffset;
       const section = this.sections.find((section, idx) => {
         if(
-          top > (this.$refs[section].$el.offsetTop - 250)
+          top > (this.$refs[section].$el.offsetTop - 350)
           || idx === this.sections.length - 1
         ) {
           return true;
@@ -45,14 +50,26 @@ export default {
         this.activeSection = section;
       }
     },
+    onResize() {
+      if(window.innerWidth < 700) {
+        this.portfolioColumns = 2;
+      } else {
+        this.portfolioColumns = 3;
+      }
+    },
   },
   mounted() {
     this.sections = Object.keys(this.$refs).reverse();
     this.onScrollDebounce = debounce(this.onScroll, 100);
     window.addEventListener('scroll', this.onScrollDebounce, { passive: true });
+
+    this.onResizeDebounce = debounce(this.onResize, 500);
+    window.addEventListener('resize', this.onResizeDebounce);
+    this.onResize();
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.onScrollDebounce);
+    window.removeEventListener('resize', this.onResizeDebounce);
   },
 };
 </script>
@@ -93,6 +110,11 @@ export default {
       img {
         width: 560px;
       }
+    }
+  }
+  @media (max-width: 760px) {
+    .main-fixed .main-name img {
+      width: 340px;
     }
   }
 }

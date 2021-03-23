@@ -47,7 +47,9 @@ export default {
   background-color: $background;
   .about {
     display: flex;
-    padding: 96px 0 64px;
+    padding-top: 96px;
+    padding-bottom: 64px;
+    flex-wrap: wrap;
   }
   .about-left {
     width: 50%;
@@ -68,11 +70,26 @@ export default {
       padding: 16px;
       box-shadow: 0 0 4px rgb(0, 0, 0, 0.2);
       background-color: white;
+      align-self: center;
     }
     img {
-      width: 520px;
+      width: 100%;
+      max-width: 520px;
       height: auto;
       align-self: center;
+    }
+  }
+  @media (max-width: 1000px) {
+    .about-left .about-item {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 900px) {
+    .about-left, .about-right {
+      width: 100%;
+    }
+    .about-right {
+      margin-top: 48px;
     }
   }
 }

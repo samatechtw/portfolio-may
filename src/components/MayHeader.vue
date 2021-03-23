@@ -5,37 +5,38 @@
       <div class="header-left">
         <img :src="MayHeader" @click="scroll(0)">
       </div>
-      <div class="header-right">
-        <div
-          v-for="link in headerLinks"
-          :key="link.title"
-          class="header-link"
-          :class="{ active: activeSection === link.id }"
-          @click="link.fn"
-        >
-          <a
-            v-if="link.link"
-            :id="linkId(link)"
-            target="_blank"
-            :href="link.link"
-          >
-            {{ $t(link.title) }}
-          </a>
-          <span
-            v-else
-            :id="linkId(link)"
-          >
-            {{ $t(link.title) }}
-          </span>
+      <MayHeaderLinks
+        class="header-right"
+        :links="headerLinks"
+        :activeLink="activeLink"
+        :activeSection="activeSection"
+      />
+      <div
+        class="sidebar-toggle"
+        @click="sidebarOpened = true"
+      >
+        <em /><em /><em />
+      </div>
+      <div
+        class="header-sidebar-wrap"
+        :class="{ opened: sidebarOpened }"
+        @click="sidebarOpened = false"
+      >
+        <div class="header-sidebar" @click.stop>
+          <Cross
+            class="sidebar-close sidebar-toggle"
+            :clickable="true"
+            color="black"
+            @click="sidebarOpened = false"
+          />
+            <MayHeaderLinks
+              class="header-links-mobile"
+              :links="headerLinks"
+              :activeLink="activeLink"
+              :activeSection="activeSection"
+              @linkClick="sidebarOpened = false"
+            />
         </div>
-        <div
-          v-if="activeLink"
-          class="header-underline"
-          :style="{
-            width: activeLink.width,
-            left: activeLink.left,
-          }"
-        />
       </div>
     </div>
   </div>
@@ -46,6 +47,7 @@
 
 const link = (id, fn) => ({
   id,
+  headerId: `header-${link.id}`,
   title: `header.${id}`,
   fn: () => fn(id),
 });
@@ -71,6 +73,7 @@ export default {
           link: '/MayLuong_RESUME.pdf'
         },
       ],
+      sidebarOpened: false,
     };
   },
   computed: {
@@ -95,11 +98,8 @@ export default {
         behavior: 'smooth',
       });
     },
-    linkId(link) {
-      return `header-${link.id}`;
-    },
     calculateUnderline(link) {
-      const el = document.getElementById(this.linkId(link));
+      const el = document.getElementById(link.headerId);
       const size = el.getBoundingClientRect();
       return {
         ...link,
@@ -120,18 +120,59 @@ export default {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   color: $text;
   background-color: $background-white;
-  a, span {
-    color: $text;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    &:hover {
-      opacity: 0.7;
-      text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-    }
-  }
   .container {
     @mixin flex-center;
     height: 100%;
+    position: relative;
+  }
+  .header-sidebar-wrap {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    transition: 0.3s ease;
+    display: none;
+    z-index: 1010;
+    right: -100%;
+    top: 0;
+    margin: 0;
+
+    &.opened {
+      transform: translateX(-100%);
+    }
+  }
+  .header-sidebar {
+    position: absolute;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: $white;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+  .sidebar-toggle {
+    cursor: pointer;
+    display: none;
+    margin-left: auto;
+    margin-right: 16px;
+
+    em {
+      display: block;
+      width: 19px;
+      height: 2px;
+      background: black;
+      margin-top: 5px;
+      transition: all 0.3s;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+  .sidebar-close {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    z-index: 99;
   }
   .header-left {
     @mixin flex-center;
@@ -141,26 +182,13 @@ export default {
       cursor: pointer;
     }
   }
-  .header-right {
-    margin-left: auto;
-    display: flex;
-    position: relative;
-  }
-  .header-underline {
-    position: absolute;
-    bottom: -2px;
-    height: 2px;
-    background-color: black;
-    transition-property: left width;
-    transition-timing-function: ease-in;
-    transition-duration: 0.2s;
-  }
-  .header-link {
-    letter-spacing: 0.8px;
-    &:not(:first-child) {
-      margin-left: 24px;
+  @media (max-width: 640px) {
+    .header-sidebar-wrap, .sidebar-toggle {
+      display: block;
     }
-    cursor: pointer;
+    .header-right {
+      display: none;
+    }
   }
 }
 </style>

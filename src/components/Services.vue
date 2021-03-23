@@ -40,7 +40,8 @@ export default {
 .services-wrap {
   background-color: $background-white;
   .services {
-    padding: 96px 0 64px;
+    padding-top: 96px;
+    padding-bottom: 64px;
     .services-title {
       @mixin section-title;
     }
