@@ -52,6 +52,8 @@ export default {
     display: flex;
   }
   .modal-left {
+    display: flex;
+    align-items: flex-start;
     img {
       min-width: 240px;
       max-width: 300px;
@@ -83,7 +85,6 @@ export default {
       flex-direction: column-reverse;
     }
     .modal-left {
-      display: flex;
       justify-content: center;
       margin-top: 24px;
     }

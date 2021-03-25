@@ -103,7 +103,7 @@ export default {
   width: 640px;
   max-width: 90%;
   padding: 0 40px 40px;
-  margin: 140px auto;
+  margin: 120px auto 0;
   background-color: $white;
   box-shadow: 0 2px 8px rgba($black, 0.4);
 }
@@ -123,6 +123,11 @@ export default {
     &:hover {
       transform: scale(1.5, 1.5);
     }
+  }
+}
+@media (max-width: 640px) {
+  .modal-inner {
+    margin-top: 80px;
   }
 }
 

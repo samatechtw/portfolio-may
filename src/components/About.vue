@@ -59,7 +59,8 @@ export default {
     }
     .about-item {
       @mixin text 24px;
-      line-height: 40px;
+      line-height: 36px;
+      margin-top: 12px;
     }
   }
   .about-right {
