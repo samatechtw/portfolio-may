@@ -1,35 +1,24 @@
 <template>
-<div class="portfolio-item">
-  <img
-    class="portfolio-item-image"
-    :src="item.image"
-  >
-  <div class="portfolio-item-content">
-    <div class="portfolio-item-title">
-      {{ item.title }}
-    </div>
-    <div class="portfolio-item-subtitle">
-      {{ item.subtitle }}
+  <div class="portfolio-item">
+    <img class="portfolio-item-image" :src="item.image" />
+    <div class="portfolio-item-content">
+      <div class="portfolio-item-title">{{ item.title }}</div>
+      <div class="portfolio-item-subtitle">{{ item.subtitle }}</div>
     </div>
   </div>
-</div>
 </template>
 
-<script>
-
-export default {
-  name: 'portfolio-item',
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    },
+<script lang="ts" setup>
+defineProps({
+  item: {
+    type: Object,
+    required: true,
   },
-};
+});
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .portfolio-item {
   position: relative;

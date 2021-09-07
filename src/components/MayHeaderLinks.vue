@@ -1,75 +1,68 @@
 <template>
-<div class="header-links">
-  <div
-    v-for="link in links"
-    :key="link.title"
-    class="header-link"
-    :class="{ active: activeSection === link.id }"
-    @click="linkClick(link)"
-  >
-    <a
-      v-if="link.link"
-      :id="link.headerId"
-      target="_blank"
-      :href="link.link"
+  <div class="header-links">
+    <div
+      v-for="link in links"
+      :key="link.title"
+      class="header-link"
+      :class="{ active: activeSection === link.id }"
+      @click="linkClick(link)"
     >
-      {{ $t(link.title) }}
-    </a>
-    <span
-      v-else
-      :id="link.headerId"
-    >
-      {{ $t(link.title) }}
-    </span>
+      <a v-if="link.link" :id="link.headerId" target="_blank" :href="link.link">{{
+        t(link.title)
+      }}</a>
+      <span v-else :id="link.headerId">{{ t(link.title) }}</span>
+    </div>
+    <div
+      v-if="activeLink"
+      class="header-underline"
+      :style="{
+        width: activeLink.width,
+        left: activeLink.left,
+      }"
+    />
   </div>
-  <div
-    v-if="activeLink"
-    class="header-underline"
-    :style="{
-      width: activeLink.width,
-      left: activeLink.left,
-    }"
-  />
-</div>
 </template>
 
-<script>
-export default {
-  name: 'may-header-links',
-  emits: ['link-click'],
-  props: {
-    activeLink: {
-      type: Object,
-      default: null,
-    },
-    links: {
-      type: Array,
-      default: () => ([]),
-    },
-    activeSection: {
-      type: String,
-      default: null,
-    },
+<script lang="ts" setup>
+import { HeaderLink } from '@/interface';
+import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
+defineProps({
+  activeLink: {
+    type: Object as PropType<HeaderLink>,
+    default: null,
   },
-  methods: {
-    linkClick(link) {
-      if(link.fn) {
-        link.fn();
-      }
-      this.$emit('link-click');
-    },
+  links: {
+    type: Array as PropType<HeaderLink[]>,
+    required: true,
   },
+  activeSection: {
+    type: String,
+    default: null,
+  },
+});
+const emit = defineEmits(['link-click']);
+
+const linkClick = (link: HeaderLink) => {
+  if (link.fn) {
+    link.fn(link.id);
+  }
+  emit('link-click');
 };
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .header-links {
   margin-left: auto;
   display: flex;
   position: relative;
-  a, span {
+  a,
+  span {
     color: $text;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -90,6 +83,7 @@ export default {
   .header-link {
     letter-spacing: 0.8px;
     cursor: pointer;
+    font-size: 15px;
     &:not(:first-child) {
       margin-left: 24px;
     }
@@ -100,12 +94,12 @@ export default {
     padding-top: 64px;
     align-items: center;
     .header-link {
-      font-size: 28px;
+      font-size: 24px;
       margin-top: 16px;
-      &:not(:first-child) { margin-left: 0; }
+      &:not(:first-child) {
+        margin-left: 0;
+      }
     }
   }
 }
-
-
 </style>

@@ -1,27 +1,20 @@
 <template>
-<transition name="modal">
-  <div
-    v-if="show"
-    class="modal-outer"
-    @click="handleClickOutside"
-  >
-    <div class="modal-inner">
-      <div class="modal-top">
-        <img
-          v-if="cancelable"
-          class="cancel"
-          :src="IcClose"
-          @click="$emit('cancel')"
-        >
+  <transition name="modal">
+    <div v-if="show" class="modal-outer" @click="handleClickOutside">
+      <div class="modal-inner">
+        <div class="modal-top">
+          <img v-if="cancelable" class="cancel" :src="IcClose" @click="$emit('cancel')" />
+        </div>
+        <!-- slot for variable content -->
+        <slot name="content" />
       </div>
-      <!-- slot for variable content -->
-      <slot name="content" />
     </div>
-  </div>
-</transition>
+  </transition>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { onUnmounted, toRefs, watch } from 'vue';
+
 /*
 Usage:
 
@@ -37,53 +30,49 @@ Usage:
     </template>
   </Modal>
 */
+const props = defineProps({
+  show: Boolean,
+  cancelable: {
+    type: Boolean,
+    default: true,
+  },
+});
+const { show, cancelable } = toRefs(props);
+const emit = defineEmits(['cancel']);
 
-export default {
-  name: 'modal',
-  emits: ['cancel'],
-  props: {
-    show: Boolean,
-    cancelable: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  watch: {
-    show(show) {
-      if(show) {
-        document.addEventListener('keydown', this.handleEscape);
-        document.body.classList.add('noscroll');
-      } else {
-        document.removeEventListener('keydown', this.handleEscape);
-        document.body.classList.remove('noscroll');
-      }
-    },
-  },
-  methods: {
-    handleClickOutside(e) {
-      if(
-        this.cancelable
-        && (typeof e.target.className === 'string')
-        && (e.target.className.split(' ').indexOf('modal-outer') >= 0)
-      ) {
-        this.$emit('cancel');
-      }
-    },
-    handleEscape(e) {
-      if(e.key === 'Escape') {
-        this.$emit('cancel');
-      }
-    },
-  },
-  unmounted() {
-    document.removeEventListener('keydown', this.handleEscape);
+watch(show, (newVal) => {
+  if (newVal) {
+    document.addEventListener('keydown', handleEscape);
+    document.body.classList.add('noscroll');
+  } else {
+    document.removeEventListener('keydown', handleEscape);
     document.body.classList.remove('noscroll');
-  },
+  }
+});
+const handleClickOutside = (e: MouseEvent) => {
+  if (cancelable.value) {
+    const target = e.target as HTMLElement;
+    if (
+      typeof target.className === 'string' &&
+      target.className.split(' ').indexOf('modal-outer') >= 0
+    ) {
+      emit('cancel');
+    }
+  }
 };
+const handleEscape = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    emit('cancel');
+  }
+};
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleEscape);
+  document.body.classList.remove('noscroll');
+});
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .modal-outer {
   box-sizing: border-box;
@@ -152,5 +141,4 @@ export default {
   opacity: 0;
   transform: scale(0.7) translateY(-10%);
 }
-
 </style>

@@ -1,42 +1,32 @@
 <template>
-<div class="portfolio-pager">
-  <div class="pager-nag-left" @click="goPrev" />
-  <div class="pager">
-    <transition-group :name="pageDir" tag="div">
-      <slot />
-    </transition-group>
+  <div class="portfolio-pager">
+    <div class="pager-nag-left" @click="goPrev" />
+    <div class="pager">
+      <transition-group :name="pageDir" tag="div">
+        <slot />
+      </transition-group>
+    </div>
+    <div id="pager-nav-right" @click="goNext" />
   </div>
-  <div id="pager-nav-right" @click="goNext" />
-</div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 
-export default {
-  setup() {
-    const page = ref(0);
-    const pageDir = ref('left');
-    const goPrev = () => {
-      page.value = (page.value - 1) % 3;
-      pageDir.value = 'left';
-    };
-    const goNext = () => {
-      page.value = (page.value + 1) % 3;
-    };
+const page = ref(0);
+const pageDir = ref('left');
 
-    return {
-      page,
-      goPrev,
-      goNext,
-      pageDir
-    };
-  },
+const goPrev = () => {
+  page.value = (page.value - 1) % 3;
+  pageDir.value = 'left';
+};
+const goNext = () => {
+  page.value = (page.value + 1) % 3;
 };
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 $size: 600px;
 

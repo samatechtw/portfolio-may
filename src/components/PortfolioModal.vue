@@ -1,48 +1,35 @@
 <template>
-<Modal
-  :show="show"
-  class="portfolio-modal"
-  @cancel="$emit('cancel')"
->
-  <template #content>
-    <div class="modal-content">
-      <div class="modal-left">
-        <img :src="item.image">
-      </div>
-      <div class="modal-right">
-        <div class="modal-title">
-          {{ item.subtitle }}
+  <Modal :show="show" class="portfolio-modal" @cancel="$em('cancel')">
+    <template #content>
+      <div class="modal-content">
+        <div class="modal-left">
+          <img :src="item.image" />
         </div>
-        <div class="modal-subtitle">
-          {{ item.title }}
+        <div class="modal-right">
+          <div class="modal-title">{{ item.subtitle }}</div>
+          <div class="modal-subtitle">{{ item.ti }}</div>
+          <ul class="modal-bullets">
+            <li v-for="(bullet, idx) in item.bullets" :key="idx">{{ bullet }}</li>
+          </ul>
         </div>
-        <ul class="modal-bullets">
-          <li v-for="(bullet, idx) in item.bullets" :key="idx">
-            {{ bullet }}
-          </li>
-        </ul>
       </div>
-    </div>
-  </template>
-</Modal>
+    </template>
+  </Modal>
 </template>
 
-<script>
-export default {
-  name: 'portfolio-modal',
-  emits: ['cancel'],
-  props: {
-    show: Boolean,
-    item: {
-      type: Object,
-      default: null,
-    },
+<script lang="ts" setup>
+defineEmits(['cancel']);
+defineProps({
+  show: Boolean,
+  item: {
+    type: Object,
+    default: null,
   },
-};
+});
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .portfolio-modal {
   .modal-inner {

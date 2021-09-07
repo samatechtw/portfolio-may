@@ -1,81 +1,82 @@
 <template>
-<div class="home-wrap">
-  <div class="main">
-    <div
-      class="main-fixed"
-      :style="{
+  <div class="home-wrap">
+    <div class="main">
+      <div class="main-fixed" :style="{
         'background-image': `url(${HomeBg})`,
-      }"
-    >
-      <div class="main-name">
-        <img :src="MayLuong">
+      }">
+        <div class="main-name">
+          <img :src="MayLuong" />
+        </div>
       </div>
     </div>
+    <MayHeader :activeSection="activeSection" />
+    <About ref="about" :selected="activeSection === 'about'" />
+    <Services ref="services" :selected="activeSection === 'services'" />
+    <Portfolio
+      ref="portfolio"
+      :selected="activeSection === 'portfolio'"
+      :columns="portfolioColumns"
+    />
+    <Contact ref="contact" :selected="activeSection === 'contact'" />
   </div>
-  <MayHeader :activeSection="activeSection" />
-  <About ref="about" :selected="activeSection === 'about'" />
-  <Services ref="services" :selected="activeSection === 'services'" />
-  <Portfolio
-    ref="portfolio"
-    :selected="activeSection === 'portfolio'"
-    :columns="portfolioColumns"
-  />
-  <Contact ref="contact" :selected="activeSection === 'contact'" />
-</div>
 </template>
 
-<script>
-import { debounce } from '/src/utils';
+<script lang="ts" setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { debounce } from '@/utils';
 
-export default {
-  name: 'home',
-  data() {
-    return {
-      activeSection: null,
-      portfolioColumns: 3,
-    };
-  },
-  methods: {
-    onScroll() {
-      const top = window.pageYOffset;
-      const section = this.sections.find((section, idx) => {
-        if(
-          top > (this.$refs[section].$el.offsetTop - 350)
-          || idx === this.sections.length - 1
-        ) {
-          return true;
-        }
-      });
-      if(section !== this.activeSection) {
-        this.activeSection = section;
-      }
-    },
-    onResize() {
-      if(window.innerWidth < 700) {
-        this.portfolioColumns = 2;
-      } else {
-        this.portfolioColumns = 3;
-      }
-    },
-  },
-  mounted() {
-    this.sections = Object.keys(this.$refs).reverse();
-    this.onScrollDebounce = debounce(this.onScroll, 100);
-    window.addEventListener('scroll', this.onScrollDebounce, { passive: true });
-
-    this.onResizeDebounce = debounce(this.onResize, 500);
-    window.addEventListener('resize', this.onResizeDebounce);
-    this.onResize();
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.onScrollDebounce);
-    window.removeEventListener('resize', this.onResizeDebounce);
-  },
+const about = ref();
+const services = ref();
+const portfolio = ref();
+const contact = ref();
+const refs: Record<string, any> = {
+  about,
+  services,
+  portfolio,
+  contact
 };
+const activeSection = ref();
+const portfolioColumns = ref(3);
+
+let onResizeDebounce: (this: Window, ev: UIEvent) => any;
+let onScrollDebounce: (this: Window, ev: Event) => any;
+let sections: string[];
+
+const onScroll = () => {
+  const top = window.pageYOffset;
+  const section = sections.find((section, idx: number) => {
+    if (top > refs[section].value.$el.offsetTop - 350 || idx === sections.length - 1) {
+      return true;
+    }
+  });
+  if (section !== activeSection.value) {
+    activeSection.value = section;
+  }
+};
+const onResize = () => {
+  if (window.innerWidth < 700) {
+    portfolioColumns.value = 2;
+  } else {
+    portfolioColumns.value = 3;
+  }
+};
+onMounted(() => {
+  sections = Object.keys(refs).reverse();
+  onScrollDebounce = debounce(onScroll, 100);
+  window.addEventListener('scroll', onScrollDebounce, { passive: true });
+
+  onResizeDebounce = debounce(onResize, 500);
+  window.addEventListener('resize', onResizeDebounce);
+  onResize();
+});
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', onScrollDebounce);
+  window.removeEventListener('resize', onResizeDebounce);
+});
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import "@/assets/css/global.css";
 
 .section-title {
   @mixin section-title;
@@ -86,7 +87,7 @@ export default {
 
 .home-wrap {
   color: $text;
-  > div  {
+  > div {
     position: relative;
     z-index: 2;
   }

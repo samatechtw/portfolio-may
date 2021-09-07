@@ -1,51 +1,41 @@
 <template>
-<div class="service-item">
-  <div class="service-item-image desktop">
-    <img :src="image" :style="{ width: imageWidth }">
-  </div>
-  <div class="service-item-text">
-    <div class="service-item-title-wrap">
-      <div class="service-item-image mobile">
-        <img :src="image" :style="{ width: imageWidth }">
-      </div>
-      <div class="service-item-title">
-        {{ copy.title }}
-      </div>
+  <div class="service-item">
+    <div class="service-item-image desktop">
+      <img :src="image" :style="{ width: imageWidth }" />
     </div>
-    <ul>
-      <li
-        v-for="(item, index) in copy.bullets"
-        :key="index"
-      >
-        {{ item }}
-      </li>
-    </ul>
+    <div class="service-item-text">
+      <div class="service-item-title-wrap">
+        <div class="service-item-image mobile">
+          <img :src="image" :style="{ width: imageWidth }" />
+        </div>
+        <div class="service-item-title">{{ copy.title }}</div>
+      </div>
+      <ul>
+        <li v-for="(item, index) in copy.bullets" :key="index">{{ item }}</li>
+      </ul>
+    </div>
   </div>
-</div>
 </template>
 
-<script>
-export default {
-  name: 'service-item',
-  props: {
-    copy: {
-      type: Object,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
-    imageWidth: {
-      type: String,
-      default: '60px',
-    },
+<script lang="ts" setup>
+defineProps({
+  copy: {
+    type: Object,
+    required: true,
   },
-};
+  image: {
+    type: String,
+    required: true,
+  },
+  imageWidth: {
+    type: String,
+    default: '60px',
+  },
+});
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .service-item {
   display: flex;

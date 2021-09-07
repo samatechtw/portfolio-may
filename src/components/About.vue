@@ -1,47 +1,39 @@
 <template>
-<div id="about" class="about-wrap">
-  <div class="about container">
-    <div class="about-left">
-      <div class="about-title section-title">
-        <span :class="{ selected }">{{ $t('about.title') }}</span>
+  <div id="about" class="about-wrap">
+    <div class="about container">
+      <div class="about-left">
+        <div class="about-title section-title">
+          <span :class="{ selected }">{{ t('about.title') }}</span>
+        </div>
+        <ul class="about-items">
+          <li v-for="(item, index) in items" :key="index" class="about-item">
+            {{ item }}
+          </li>
+        </ul>
       </div>
-      <ul class="about-items">
-        <li
-          v-for="(item, index) in $tm('about.items')"
-          :key="index"
-          class="about-item"
-        >
-          {{ item }}
-        </li>
-      </ul> 
-    </div>
-    <div class="about-right">
-      <div class="about-img-wrap">
-        <img :src="MayImg">
+      <div class="about-right">
+        <div class="about-img-wrap">
+          <img :src="May" />
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
-<script>
-import MayImg from '/src/assets/img/may.jpg';
+<script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
 
-export default {
-  name: 'about',
-  props: {
-    selected: Boolean,
-  },
-  data() {
-    return {
-      MayImg,
-    };
-  },
-};
+defineProps({
+  selected: Boolean,
+});
+
+const { t, tm } = useI18n();
+
+const items = tm('about.items') as string[];
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .about-wrap {
   background-color: $background;
@@ -86,7 +78,8 @@ export default {
     }
   }
   @media (max-width: 900px) {
-    .about-left, .about-right {
+    .about-left,
+    .about-right {
       width: 100%;
     }
     .about-right {

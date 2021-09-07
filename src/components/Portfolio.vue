@@ -1,45 +1,41 @@
 <template>
-<div
-  id="portfolio"
-  class="portfolio-wrap"
-  :class="{ 'modal-open': !!activeItem }"
->
-  <div class="portfolio container">
-    <div class="portfolio-title section-title">
-      <span :class="{ selected }">{{ $t('portfolio.title') }}</span>
-    </div>
-    <div class="portfolio-content">
-      <div
-        v-for="n in columns"
-        :key="n"
-        class="portfolio-column"
-        :class="`columns${columns}`"
-      >
-        <PortfolioItem
-          v-for="(item, index) in colItems(n - 1)"
-          :key="index"
-          :item="item"
-          :style="{ width, margin }"
-          @click="activeItem = item"
-        />
+  <div id="portfolio" class="portfolio-wrap" :class="{ 'modal-open': !!activeItem }">
+    <div class="portfolio container">
+      <div class="portfolio-title section-title">
+        <span :class="{ selected }">{{ t('portfolio.title') }}</span>
+      </div>
+      <div class="portfolio-content">
+        <div
+          v-for="n in columns"
+          :key="n"
+          class="portfolio-column"
+          :class="`columns${columns}`"
+        >
+          <PortfolioItem
+            v-for="(item, index) in colItems(n - 1)"
+            :key="index"
+            :item="item"
+            :style="{ width, margin }"
+            @click="activeItem = item"
+          />
+        </div>
       </div>
     </div>
+    <PortfolioModal :show="!!activeItem" :item="activeItem" @cancel="activeItem = null" />
   </div>
-  <PortfolioModal
-    :show="!!activeItem"
-    :item="activeItem"
-    @cancel="activeItem = null"
-  />
-</div>
 </template>
 
-<script>
-import OldDoor1 from '/src/assets/img/old-door1.jpg';
-import Inteplast1 from '/src/assets/img/inteplast1.jpg';
-import Santu2 from '/src/assets/img/santu2.jpg';
-import Sunglasses2 from '/src/assets/img/sunglasses2.jpg';
-import Lamanh1 from '/src/assets/img/lamanh1.jpg';
-import Sakura2 from '/src/assets/img/sakura2.jpg';
+<script lang="ts" setup>
+import OldDoor1 from '@/assets/img/old-door1.jpg';
+import Inteplast1 from '@/assets/img/inteplast1.jpg';
+import Santu2 from '@/assets/img/santu2.jpg';
+import Sunglasses2 from '@/assets/img/sunglasses2.jpg';
+import Lamanh1 from '@/assets/img/lamanh1.jpg';
+import Sakura2 from '@/assets/img/sakura2.jpg';
+import { ref, toRefs } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const items = [
   {
@@ -68,7 +64,7 @@ const items = [
     bullets: [
       'Produce website posts, social media content, and product/service descriptions',
       'Monitor the online presence of the brand on Facebook, Instagram, and website',
-      'Travel review (Taiwan, Korea and Japan-based)'
+      'Travel review (Taiwan, Korea and Japan-based)',
     ],
   },
   {
@@ -100,43 +96,35 @@ const items = [
   },
 ];
 
-export default {
-  name: 'portfolio',
-  props: {
-    selected: Boolean,
-    columns: {
-      type: Number,
-      default: 3,
-    },
+const activeItem = ref();
+const width = ref('100%');
+const margin = ref('8px 0;');
+
+const props = defineProps({
+  selected: Boolean,
+  columns: {
+    type: Number,
+    default: 3,
   },
-  data() {
-    return {
-      items,
-      activeItem: null,
-      width: '100%',
-      margin: '8px 0;',
-    };
-  },
-  methods: {
-    colItems(index) {
-      const { items, columns } = this;
-      const firstEnd = Math.ceil(items.length / columns);
-      if(index === 0) {
-        return items.slice(0, firstEnd);
-      }
-      let restLen = Math.floor(items.length / columns);
-      const start = firstEnd + ((index - 1) * restLen);
-      if(index === columns - 1) {
-        restLen = Math.max(restLen, items.length - start);
-      }
-      return items.slice(start, start + restLen);
-    }
+});
+const { columns } = toRefs(props);
+
+const colItems = (index: number) => {
+  const firstEnd = Math.ceil(items.length / columns.value);
+  if (index === 0) {
+    return items.slice(0, firstEnd);
   }
+  let restLen = Math.floor(items.length / columns.value);
+  const start = firstEnd + (index - 1) * restLen;
+  if (index === columns.value - 1) {
+    restLen = Math.max(restLen, items.length - start);
+  }
+  return items.slice(start, start + restLen);
 };
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .home-wrap > .portfolio-wrap {
   &.modal-open {

@@ -1,68 +1,56 @@
 <template>
-<div id="contact" class="contact-wrap">
-  <div class="contact container">
-    <div class="contact-title section-title">
-      <span :class="{ selected }">{{ $t('contact.work') }}</span>
-    </div>
-    <div class="contact-items">
-      <div class="contact-item">
-        <a target="_blank" :href="`mailto:${$t('contact.email.content')}`">
-          <div class="contact-item-title">
-            {{ $t('contact.email.title') }}
-          </div>
-          <div class="contact-item-content">
-            {{ $t('contact.email.content') }}
-          </div>
-        </a>
+  <div id="contact" class="contact-wrap">
+    <div class="contact container">
+      <div class="contact-title section-title">
+        <span :class="{ selected }">{{ t('contact.work') }}</span>
       </div>
-      <div class="contact-item">
-        <a target="_blank" href="https://www.linkedin.com/in/may-luong-0a882b15a/">
-          <div class="contact-item-title">
-            {{ $t('contact.linkedin.title') }}
-          </div>
-          <div class="contact-item-content">
-            {{ $t('contact.linkedin.content') }}
-          </div>
-        </a>
-      </div>
-      <div class="contact-item">
-        <a target="_blank" href="https://www.facebook.com/sweetkhet">
-          <div class="contact-item-title">
-            {{ $t('contact.facebook.title') }}
-          </div>
-          <div class="contact-item-content">
-            {{ $t('contact.facebook.content') }}
-          </div>
-        </a>
-      </div>
-      <!--
+      <div class="contact-items">
+        <div class="contact-item">
+          <a target="_blank" :href="`mailto:${t('contact.email.content')}`">
+            <div class="contact-item-title">{{ t('contact.email.title') }}</div>
+            <div class="contact-item-content">{{ t('contact.email.content') }}</div>
+          </a>
+        </div>
+        <div class="contact-item">
+          <a target="_blank" href="https://www.linkedin.com/in/may-luong-0a882b15a/">
+            <div class="contact-item-title">{{ t('contact.linkedin.title') }}</div>
+            <div class="contact-item-content">{{ t('contact.linkedin.content') }}</div>
+          </a>
+        </div>
+        <div class="contact-item">
+          <a target="_blank" href="https://www.facebook.com/sweetkhet">
+            <div class="contact-item-title">{{ t('contact.facebook.title') }}</div>
+            <div class="contact-item-content">{{ t('contact.facebook.content') }}</div>
+          </a>
+        </div>
+        <!--
       <div class="contact-item">
         <div class="contact-item-title">
-          <a target="_blank" href="https://www.instagram.com/mayderlust/">{{ $t('contact.instagram.title') }}</a>
+          <a target="_blank" href="https://www.instagram.com/mayderlust/">{{ t('contact.instagram.title') }}</a>
         </div>
         <div class="contact-item-content">
-          {{ $t('contact.instagram.content') }}
+          {{ t('contact.instagram.content') }}
         </div>
       </div>
-      -->
+        -->
+      </div>
+      <img class="footer-img" :src="Footer" />
     </div>
-    <img class="footer-img" :src="Footer">
   </div>
-</div>
 </template>
 
-<script>
+<script setup>
+import { useI18n } from 'vue-i18n';
 
-export default {
-  name: 'contact',
-  props: {
-    selected: Boolean,
-  },
-};
+defineProps({
+  selected: Boolean,
+});
+
+const { t } = useI18n();
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .contact-wrap {
   a {

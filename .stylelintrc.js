@@ -3,12 +3,18 @@ module.exports = {
   extends: 'stylelint-config-standard',
   rules: {
     'at-rule-empty-line-before': null,
-    'at-rule-no-unknown': [true, {
-      ignoreAtRules: ['function', 'if', 'else', 'return', 'each', 'include', 'mixin'],
-    }],
-    'block-closing-brace-newline-after': ['always', {
-      ignoreAtRules: ['if', 'else'],
-    }],
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: ['function', 'if', 'else', 'return', 'each', 'include', 'mixin'],
+      },
+    ],
+    'block-closing-brace-newline-after': [
+      'always',
+      {
+        ignoreAtRules: ['if', 'else'],
+      },
+    ],
     'declaration-empty-line-before': null,
     'at-rule-semicolon-space-before': 'never',
     'rule-empty-line-before': null,

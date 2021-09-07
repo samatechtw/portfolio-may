@@ -1,22 +1,19 @@
 <template>
-<div id="resume" class="resume-wrap">
-  <div class="resume container">
-    <div class="resume-title">
-      {{ $t('resume.title') }}
+  <div id="resume" class="resume-wrap">
+    <div class="resume container">
+      <div class="resume-title">{{ t('resume.  title') }}</div>
     </div>
   </div>
-</div>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
 
-export default {
-  name: 'resume',
-};
+const { t } = useI18n();
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@/assets/css/global.css';
 
 .resume-wrap {
   background-color: $background-white;
