@@ -1,19 +1,30 @@
 <template>
   <div id="about" class="about-wrap">
     <div class="about container">
-      <div class="about-left">
-        <div class="about-title section-title">
-          <span :class="{ selected }">{{ t('about.title') }}</span>
-        </div>
-        <ul class="about-items">
-          <li v-for="(item, index) in items" :key="index" class="about-item">
-            {{ item }}
-          </li>
-        </ul>
+      <div class="about-title section-title">
+        <span :class="{ selected }">{{ t('about.title') }}</span>
       </div>
-      <div class="about-right">
-        <div class="about-img-wrap">
-          <img :src="May" />
+      <transition name="fade-in">
+        <div v-if="selected" class="about-item-top">
+          {{ items[0] }}
+        </div>
+      </transition>
+      <div class="about-content">
+        <div class="about-left">
+          <div v-for="(item, index) in items.slice(1)" :key="index" class="about-item">
+            <transition name="enter-left">
+              <div v-if="selected" :class="`about-item${index + 1}`">
+                {{ item }}
+              </div>
+            </transition>
+          </div>
+        </div>
+        <div class="about-right">
+          <transition name="enter-right">
+            <div v-if="selected" class="about-img-wrap">
+              <img :src="May" />
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -37,26 +48,37 @@ const items = tm('about.items') as string[];
 
 .about-wrap {
   background-color: $background;
+  min-height: 700px;
   .about {
     display: flex;
     padding-top: 96px;
     padding-bottom: 64px;
     flex-wrap: wrap;
+    justify-content: center;
   }
+  color: $text-brown;
   .about-left {
-    width: 50%;
     padding: 0 32px 0 0;
-    .about-items {
-      color: $text-brown;
-    }
-    .about-item {
-      @mixin text 24px;
-      line-height: 36px;
-      margin-top: 12px;
-    }
+  }
+  .about-item,
+  .about-item-top {
+    @mixin text 20px;
+    line-height: 36px;
+    margin-top: 12px;
+  }
+  .about-item2 {
+    transition-delay: 0.2s;
+  }
+  .about-item3 {
+    transition-delay: 0.4s;
+  }
+  .about-item-top {
+    margin: 24px 0 16px;
+  }
+  .about-content {
+    display: flex;
   }
   .about-right {
-    width: 50%;
     display: flex;
     justify-content: center;
     .about-img-wrap {
@@ -66,8 +88,8 @@ const items = tm('about.items') as string[];
       align-self: center;
     }
     img {
-      width: 100%;
-      max-width: 520px;
+      width: 320px;
+      max-width: 320px;
       height: auto;
       align-self: center;
     }

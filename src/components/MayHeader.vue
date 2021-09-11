@@ -74,7 +74,7 @@ const headerLinks = ref<HeaderLink[]>([
   {
     id: 'resume',
     title: 'header.resume',
-    link: '/MayLuong_RESUME.pdf',
+    link: '/May-Luong-Resume_210911.pdf',
   },
 ]);
 

@@ -5,6 +5,7 @@
 <style lang="postcss">
 @import './assets/css/font.css';
 @import './assets/css/global.css';
+@import './assets/css/animations.css';
 
 html,
 body {

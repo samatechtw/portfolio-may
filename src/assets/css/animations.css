@@ -1,0 +1,60 @@
+.bounce-in-enter-active {
+  animation: bounce-in 1s;
+}
+.bounce-in-leave-active {
+  animation: bounce-in 0.8s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.enter-right-enter-active {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.enter-right-leave-active {
+  transition: all 0.5s ease-out;
+}
+
+.enter-right-enter-from,
+.enter-right-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.enter-left-enter-active {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.enter-left-leave-active {
+  transition: all 0.5s ease-out;
+}
+
+.enter-left-enter-from,
+.enter-left-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.fade-in-enter-active {
+  transition: opacity 0.4s ease-in;
+}
+
+.fade-in-leave-active {
+  transition: opacity 0.4s ease-out;
+}
+
+.fade-in-enter-from,
+.fade-in-leave-to {
+  opacity: 0;
+}

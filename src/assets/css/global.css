@@ -10,7 +10,6 @@ $background: #fffcf8;
 
 $pink-light: #fb34dc;
 
-
 @define-mixin flex-center {
   display: flex;
   flex-direction: row;
@@ -44,8 +43,20 @@ $pink-light: #fb34dc;
   font-size: $size;
 }
 
+@define-mixin satisfy $size {
+  font-family: Satisfy, Garamond, serif;
+  font-weight: 400;
+  font-size: $size;
+}
+
+@define-mixin balqis $size {
+  font-family: Balqis, Avenir, Helvetica;
+  font-weight: 400;
+  font-size: $size;
+}
+
 @define-mixin section-title {
-  @mixin title 48px;
+  @mixin satisfy 48px;
   color: $text-brick;
   text-align: center;
 }
@@ -57,7 +68,7 @@ $pink-light: #fb34dc;
   position: relative;
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: -1px;
     width: 0px;

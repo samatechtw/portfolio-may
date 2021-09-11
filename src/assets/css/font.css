@@ -1,26 +1,42 @@
 @font-face {
   font-family: 'Staatliches';
-  src: url(@/assets/fonts/Staatliches-Regular.woff2') format('woff2'),
-    url(@/assets/fonts/Staatliches-Regular.woff') format('woff'),
-    url(@/assets/fonts/Staatliches-Regular.ttf') format('truetype');
+  src: url('@/assets/fonts/Staatliches-Regular.woff2') format('woff2'),
+    url('@/assets/fonts/Staatliches-Regular.woff') format('woff'),
+    url('@/assets/fonts/Staatliches-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SortsMillGoudy';
-  src: url(@/assets/fonts/SortsMillGoudy-Regular.woff2') format('woff2'),
-    url(@/assets/fonts/SortsMillGoudy-Regular.woff') format('woff'),
-    url(@/assets/fonts/SortsMillGoudy-Regular.ttf') format('truetype');
+  src: url('@/assets/fonts/SortsMillGoudy-Regular.woff2') format('woff2'),
+    url('@/assets/fonts/SortsMillGoudy-Regular.woff') format('woff'),
+    url('@/assets/fonts/SortsMillGoudy-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SortsMillGoudy';
-  src: url(@/assets/fonts/SortsMillGoudy-Italic.woff2') format('woff2'),
-    url(@/assets/fonts/SortsMillGoudy-Italic.woff') format('woff'),
-    url(@/assets/fonts/SortsMillGoudy-Italic.ttf') format('truetype');
+  src: url('@/assets/fonts/SortsMillGoudy-Italic.woff2') format('woff2'),
+    url('@/assets/fonts/SortsMillGoudy-Italic.woff') format('woff'),
+    url('@/assets/fonts/SortsMillGoudy-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satisfy';
+  src: url('@/assets/fonts/Satisfy-Regular.woff2') format('woff2'),
+    url('@/assets/fonts/Satisfy-Regular.woff') format('woff'),
+    url('@/assets/fonts/Satisfy-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Balqis';
+  src: url('@/assets/fonts/Balqis.woff2') format('woff2'),
+    url('@/assets/fonts/Balqis.woff') format('woff'),
+    url('@/assets/fonts/Balqis.ttf') format('truetype');
+  font-weight: 400;
 }

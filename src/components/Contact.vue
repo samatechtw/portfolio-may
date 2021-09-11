@@ -61,7 +61,7 @@ const { t } = useI18n();
   padding: 160px 0 0;
   text-align: center;
   .contact-title {
-    @mixin text 80px;
+    @mixin satisfy 80px;
     color: $text-brick;
     > span {
       &:before,

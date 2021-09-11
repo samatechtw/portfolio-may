@@ -61,7 +61,7 @@ const linkClick = (link: HeaderLink) => {
   margin-left: auto;
   display: flex;
   position: relative;
-  a,
+  @mix a,
   span {
     color: $text;
     text-decoration: none;
@@ -73,8 +73,8 @@ const linkClick = (link: HeaderLink) => {
   }
   .header-underline {
     position: absolute;
-    bottom: -2px;
-    height: 2px;
+    bottom: 0px;
+    height: 1px;
     background-color: black;
     transition-property: left width;
     transition-timing-function: ease-in;
@@ -83,9 +83,13 @@ const linkClick = (link: HeaderLink) => {
   .header-link {
     letter-spacing: 0.8px;
     cursor: pointer;
-    font-size: 15px;
+    @mixin balqis 22px;
     &:not(:first-child) {
       margin-left: 24px;
+    }
+    a {
+      text-decoration: none;
+      color: $text;
     }
   }
   @media (max-width: 640px) {
