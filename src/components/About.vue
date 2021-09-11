@@ -4,19 +4,21 @@
       <div class="about-title section-title">
         <span :class="{ selected }">{{ t('about.title') }}</span>
       </div>
-      <transition name="fade-in">
-        <div v-if="selected" class="about-item-top">
-          {{ items[0] }}
-        </div>
-      </transition>
+      <TextTransition
+        name="fade-in"
+        :show="selected"
+        :text="items[0]"
+        class="about-item-top"
+      />
       <div class="about-content">
         <div class="about-left">
           <div v-for="(item, index) in items.slice(1)" :key="index" class="about-item">
-            <transition name="enter-left">
-              <div v-if="selected" :class="`about-item${index + 1}`">
-                {{ item }}
-              </div>
-            </transition>
+            <TextTransition
+              name="enter-left"
+              :show="selected"
+              :text="item"
+              :class="`about-item${index + 1}`"
+            />
           </div>
         </div>
         <div class="about-right">
@@ -48,7 +50,6 @@ const items = tm('about.items') as string[];
 
 .about-wrap {
   background-color: $background;
-  min-height: 700px;
   .about {
     display: flex;
     padding-top: 96px;
@@ -66,10 +67,10 @@ const items = tm('about.items') as string[];
     line-height: 36px;
     margin-top: 12px;
   }
-  .about-item2 {
+  .about-item2 .text-transition-real {
     transition-delay: 0.2s;
   }
-  .about-item3 {
+  .about-item3 .text-transition-real {
     transition-delay: 0.4s;
   }
   .about-item-top {
@@ -81,6 +82,7 @@ const items = tm('about.items') as string[];
   .about-right {
     display: flex;
     justify-content: center;
+    min-height: 320px;
     .about-img-wrap {
       padding: 16px;
       box-shadow: 0 0 4px rgb(0, 0, 0, 0.2);
@@ -100,12 +102,16 @@ const items = tm('about.items') as string[];
     }
   }
   @media (max-width: 900px) {
-    .about-left,
-    .about-right {
-      width: 100%;
+    .about-content {
+      flex-wrap: wrap;
     }
     .about-right {
       margin-top: 48px;
+      width: 100%;
+    }
+    .about-left {
+      padding: 0 20px;
+      width: 100%;
     }
   }
 }
